@@ -1,0 +1,13 @@
+//
+//  MovieInfo-Dev.xcconfig
+//  MoviesInformationApp
+//
+//  Created by Akshuma Trivedi on 02/07/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SERVER_END_POINT = api.themoviedb.org
+API_KEY = b2925155642c384d5f9c26a2d4d9e103
+API_VERSION = 3
