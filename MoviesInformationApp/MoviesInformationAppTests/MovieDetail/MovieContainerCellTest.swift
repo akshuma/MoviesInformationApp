@@ -21,18 +21,19 @@ class MovieContainerCellTest: XCTestCase {
         
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         controller = (storyboard.instantiateViewController(identifier: "movieDetailViewController") as! MovieDetailViewController)
+        controller.movieId = 123
         controller.movieCreditsRepository = mockCreditsRepo
         controller.similarMovieRepository = mockSimilarMoviesRepo
         controller.loadViewIfNeeded()
-        creditsResponse = mockCreditsRepo.getCreditsResponse()
         similarMoviesResponse = mockSimilarMoviesRepo.getSimilarMoviesResponse()
+        creditsResponse = mockCreditsRepo.getCreditsResponse()
     }
 
     
     func test_creditCollection_noOfRows()  {
         let cellItem = getMovieContainerCell(1).movieCollectionView.numberOfItems(inSection: 0)
         //Assert
-        XCTAssertEqual(cellItem, 4)
+        XCTAssertEqual(cellItem, 3)
     }
 
     func test_creditCollection_AutherNameText()  {
@@ -44,10 +45,10 @@ class MovieContainerCellTest: XCTestCase {
     
     func test_similarMoviewCollection_movieNameText()  {
         let name = getMovieSimlarCollectionCell().movieNameLabel.text ?? ""
-        let responseName = similarMoviesResponse?.results.first
-        
+        let responseName = similarMoviesResponse?.results.first?.originalTitle ?? ""
+
         //Assert
-        XCTAssertEqual(name, responseName?.title ?? "")
+        XCTAssertEqual(name, responseName)
     }
     
     override func tearDownWithError() throws {
@@ -66,12 +67,16 @@ extension MovieContainerCellTest {
     }
     
     func getMoviecreditsCollectionCell() -> CreditsCollectionViewCell {
-        return getMovieContainerCell(1).movieCollectionView.dataSource?.collectionView(getMovieContainerCell(1).movieCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
+        let collectionView = getMovieContainerCell(1)
+        collectionView.containerIdentifier = ContainerIdenifier.cast
+        return collectionView.movieCollectionView.dataSource?.collectionView(collectionView.movieCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
             as! CreditsCollectionViewCell
     }
     
     func getMovieSimlarCollectionCell() -> SimilarMoviesCollectionViewCell {
-        return getMovieContainerCell(3).movieCollectionView.dataSource?.collectionView(getMovieContainerCell(3).movieCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
+        let collectionView = getMovieContainerCell(3)
+        collectionView.containerIdentifier = ContainerIdenifier.cast
+        return collectionView.movieCollectionView.dataSource?.collectionView(collectionView.movieCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
             as! SimilarMoviesCollectionViewCell
    
     }

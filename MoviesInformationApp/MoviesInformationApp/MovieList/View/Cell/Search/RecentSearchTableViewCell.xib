@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSn-lK-8Vm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recent" translatesAutoresizingMaskIntoConstraints="NO" id="jwP-NG-Tzh">
                                 <rect key="frame" x="16" y="16" width="20" height="20"/>
@@ -37,6 +37,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jwP-NG-Tzh" firstAttribute="top" secondItem="SSn-lK-8Vm" secondAttribute="top" constant="16" id="2zq-aF-eFm"/>
+                            <constraint firstAttribute="height" constant="50" id="Qcm-hr-WQe"/>
                             <constraint firstItem="OWi-GB-Yrd" firstAttribute="centerY" secondItem="jwP-NG-Tzh" secondAttribute="centerY" id="ZsL-dS-beA"/>
                             <constraint firstAttribute="trailing" secondItem="OWi-GB-Yrd" secondAttribute="trailing" constant="16" id="esl-KL-QgB"/>
                             <constraint firstItem="OWi-GB-Yrd" firstAttribute="leading" secondItem="jwP-NG-Tzh" secondAttribute="trailing" constant="8" id="nyb-XA-bDX"/>

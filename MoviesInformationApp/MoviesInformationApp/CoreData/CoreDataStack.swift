@@ -13,7 +13,7 @@ class CoreDataStack {
     private let modelName: String
     static let shared = CoreDataStack()
     
-    private init(modelName: String = "MoviesInformationApp") {
+    private init(modelName: String = "Moive") {
         self.modelName = modelName
     }
     

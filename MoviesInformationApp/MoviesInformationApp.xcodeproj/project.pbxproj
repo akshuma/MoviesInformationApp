@@ -10,6 +10,9 @@
 		2D1152F6269429F0009C3483 /* Moive.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D1152F4269429F0009C3483 /* Moive.xcdatamodeld */; };
 		2D1152FC26942A4B009C3483 /* MovieRecentSearch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1152FA26942A4B009C3483 /* MovieRecentSearch+CoreDataClass.swift */; };
 		2D1152FD26942A4B009C3483 /* MovieRecentSearch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1152FB26942A4B009C3483 /* MovieRecentSearch+CoreDataProperties.swift */; };
+		2D1153232694357F009C3483 /* CreditsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE5C8452691EA2C0059CA46 /* CreditsResponse.json */; };
+		2D11532726943582009C3483 /* SynoypsisResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE5C8442691EA0B0059CA46 /* SynoypsisResponse.json */; };
+		2D11532B26943586009C3483 /* SimilarMoviesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DE5C8592691EA920059CA46 /* SimilarMoviesResponse.json */; };
 		2D42F30826933ACD00FFDBA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2D42F30926933ACD00FFDBA2 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2DCFAB312692F59B006FA2A5 /* MovieSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFAB302692F59B006FA2A5 /* MovieSearchViewController.swift */; };
@@ -838,7 +841,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DE5C8112691D2F50059CA46 /* MovieListing.json in Resources */,
+				2D11532B26943586009C3483 /* SimilarMoviesResponse.json in Resources */,
 				2DE5C84F2691EA620059CA46 /* UsersReviewsReponse.json in Resources */,
+				2D11532726943582009C3483 /* SynoypsisResponse.json in Resources */,
+				2D1153232694357F009C3483 /* CreditsResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
