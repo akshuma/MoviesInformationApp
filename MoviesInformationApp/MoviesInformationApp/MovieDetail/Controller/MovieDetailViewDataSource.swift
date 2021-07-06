@@ -81,7 +81,7 @@ extension MovieDetailViewDataSource {
     
     fileprivate func fetchUserReviews(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.reviewTableViewCell, for: indexPath) as? ReviewTableViewCell else {return ReviewTableViewCell()}
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.userReviewHeaderTableViewCell, for: indexPath) as? UserReviewHeaderTableViewCell else {return UserReviewHeaderTableViewCell()}
         return cell
     }
     

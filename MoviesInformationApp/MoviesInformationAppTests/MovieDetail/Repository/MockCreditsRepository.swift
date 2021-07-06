@@ -22,10 +22,11 @@ class MockCreditsRepository: CreditsRepositoryProtocol {
             case .failure:
                 break
             }
+            completionHandler(result)
         }
     }
     
-    func getMovieResonse() -> CreditsResponse? {
+    func getCreditsResponse() -> CreditsResponse? {
         return movieCreditsResponse
     }
     

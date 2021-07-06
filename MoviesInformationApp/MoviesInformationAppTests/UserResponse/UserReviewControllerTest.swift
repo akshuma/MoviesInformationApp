@@ -20,10 +20,11 @@ class UserReviewControllerTest: XCTestCase {
         let storyboard = UIStoryboard(name: "UserReview", bundle: nil)
         controller = (storyboard.instantiateViewController(identifier: "UserReviewViewController") as! UserReviewViewController)
         controller.useReviewsRepository = mockRepository
-        controller.dataSource.usersReview = []
+        controller.movieId = 123
         controller.loadViewIfNeeded()
-        userReviewResponse = mockRepository.getMovieResonse()
+        userReviewResponse = mockRepository.getUsersReviewsResponse()
     }
+    
     func test_userReview_noOfrows()  {
         //arrange
         let count = userReviewResponse?.results?.count
@@ -63,19 +64,18 @@ class UserReviewControllerTest: XCTestCase {
     }
     
     func test_userReview_ratingViewRate_equalTest()  {
-        //arrange
-        let userReview = userReviewResponse?.results?.first ?? nil
-        let commentRate = "\(Double(userReview?.authorDetails?.rating ?? 0))"
-        let cellRatingView = getTableViewCell().ratingView.text
+        //Arrange
+        let userReviewcell = getTableViewCell().ratingView.rating
+        let userReview = Double(userReviewResponse?.results?.first?.authorDetails?.rating ?? 0)
         //assert
-        XCTAssertEqual(cellRatingView, commentRate)
+        XCTAssertEqual(userReviewcell, userReview)
     }
     
     func test_userReview_ratingViewRate_notEqualTest()  {
         //arrange
-        let cellRatingView = getTableViewCell().ratingView.text
+        let cellRatingView = getTableViewCell().ratingView.rating
         //assert
-        XCTAssertEqual(cellRatingView, "abc")
+        XCTAssertNotEqual(cellRatingView, 123.2)
     }
     
     func test_userReview_overViewLabel_equalTest()  {
@@ -91,10 +91,9 @@ class UserReviewControllerTest: XCTestCase {
         //arrange
         let cellContentLabel = getTableViewCell().contentLabel.text
         //assert
-        XCTAssertEqual(cellContentLabel, "wasd")
+        XCTAssertNotEqual(cellContentLabel, "wasd")
     }
     
-
     override func tearDownWithError() throws {
         super.tearDown()
         controller = nil

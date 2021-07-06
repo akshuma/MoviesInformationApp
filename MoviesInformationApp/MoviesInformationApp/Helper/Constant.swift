@@ -34,7 +34,7 @@ struct Constant {
         static let movieSynoypsisTableViewCell = "MovieSynoypsisTableViewCell"
         static let userReviewTableViewCell = "UserReviewTableViewCell"
         static let moviesContainerTableViewCell = "MoviesContainerTableViewCell"
-        static let reviewTableViewCell = "ReviewTableViewCell"
+        static let userReviewHeaderTableViewCell = "UserReviewHeaderTableViewCell"
         static let similarMoviesCollectionViewCell = "SimilarMoviesCollectionViewCell"
         static let creditsCollectionViewCell = "CreditsCollectionViewCell"
         static let recentSearchTableViewCell = "RecentSearchTableViewCell"

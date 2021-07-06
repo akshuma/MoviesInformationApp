@@ -22,6 +22,7 @@ class MockSynoypsisRepository: SynoypsisRepositoryProtocol {
             case .failure:
                 break
             }
+            completionHandler(result)
         }
     }
     

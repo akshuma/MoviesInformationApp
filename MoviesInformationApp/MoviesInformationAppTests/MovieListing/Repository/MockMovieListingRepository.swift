@@ -22,6 +22,7 @@ class MockMovieListingRepository: MovieListingRepositoryProtocol {
             case .failure:
                 break
             }
+            completionHandler(result)
         }
         
     }

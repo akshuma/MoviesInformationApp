@@ -41,7 +41,7 @@ class MovieDetailViewController: UIViewController {
     fileprivate func register() {
         //Register cell xib
         movieDetailTableView.register(UINib(nibName: "\(MovieSynoypsisTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.movieSynoypsisTableViewCell)
-        movieDetailTableView.register(UINib(nibName: "\(ReviewTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.reviewTableViewCell)
+        movieDetailTableView.register(UINib(nibName: "\(UserReviewHeaderTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.userReviewHeaderTableViewCell)
         movieDetailTableView.register(UINib(nibName: "\(MoviesContainerTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.moviesContainerTableViewCell)
     }
 

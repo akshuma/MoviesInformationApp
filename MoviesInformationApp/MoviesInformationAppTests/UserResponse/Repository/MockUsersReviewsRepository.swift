@@ -22,10 +22,11 @@ class MockUsersReviewsRepository: UsersReviewsRepositoryProtocol {
             case .failure:
                 break
             }
+            completionHandler(result)
         }
     }
 
-    func getMovieResonse() -> UsersReviewsResponse? {
+    func getUsersReviewsResponse() -> UsersReviewsResponse? {
         return movieUsersReviewsResponse
     }
     

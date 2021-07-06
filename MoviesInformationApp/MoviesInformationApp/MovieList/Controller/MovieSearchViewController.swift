@@ -13,11 +13,11 @@ class MovieSearchViewController: UITableViewController {
     var movieSearchRepository: MovieSearchRepositoryProtocol = MovieSearchRepository.shared
     var moviesArray: [Movies]?
     
-//    lazy var recentSearchResultsController: NSFetchedResultsController<RecentSearches> = {
-//        let fetchRequest: NSFetchRequest<RecentSearches> = RecentSearches.fetchRequest()
+//    lazy var recentSearchResultsController: NSFetchedResultsController<Search> = {
+//        let fetchRequest: NSFetchRequest<Search> = Search.fetchRequest()
 //        fetchRequest.fetchLimit = 5
 //        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
+//        //fetchRequest.sortDescriptors = [sortDescriptor]
 //        let recentSearchController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.managedContext, sectionNameKeyPath: nil, cacheName: nil)
 //        return recentSearchController
 //    }()
@@ -60,7 +60,7 @@ class MovieSearchViewController: UITableViewController {
     fileprivate func fetchRecentSearchCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> RecentSearchTableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.recentSearchTableViewCell, for: indexPath) as? RecentSearchTableViewCell else {return RecentSearchTableViewCell()}
-       // cell.recentSearchLabel.text = recentSearchResultsController.fetchedObjects?[indexPath.row].movieName
+       // cell.recentSearchLabel.text = recentSearchResultsController.object(at: IndexPath(row: indexPath.row, section: 0)).movieName
         return cell
     }
     
@@ -117,19 +117,20 @@ extension MovieSearchViewController {
         }
      }
 }
-//extension MovieSearchViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        if let text = searchController.searchBar.text {
-//            if text.isEmpty == false {
-//                getSearchMovies(query: text, pageNo: 1)
-//            }
-//        }
-//    }
-//    
-//    
-//}
-//extension MovieSearchViewController: NSFetchedResultsControllerDelegate {
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        self.tableView.reloadData()
-//    }
-//}
+
+extension MovieSearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text {
+            if text.isEmpty == false {
+                getSearchMovies(query: text, pageNo: 1)
+            }
+        }
+    }
+    
+    
+}
+extension MovieSearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.reloadData()
+    }
+}

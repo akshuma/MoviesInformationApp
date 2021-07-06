@@ -22,10 +22,11 @@ class MockSimilarMoviesRepository: SimilarMoviesRepositoryProtocol {
             case .failure:
                 break
             }
+            completionHandler(result)
         }
     }
 
-    func getMovieResonse() -> SimilarMoviesResponse? {
+    func getSimilarMoviesResponse() -> SimilarMoviesResponse? {
         return movieSimilarMoviesResponse
     }
     

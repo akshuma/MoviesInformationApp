@@ -5,9 +5,9 @@
 //  Created by Vishmita Shetty on 25/04/21.
 //
 
-import Foundation
-import CoreData
-
+//import Foundation
+//import CoreData
+//
 //class RecentSearchDataOperations {
 //    static let shared = RecentSearchDataOperations()
 //    let managedObjectContext = CoreDataStack.shared.managedContext
@@ -21,8 +21,8 @@ import CoreData
 //        managedObjectContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 //        
 //        privateMOC.perform {
-//            guard let enity = NSEntityDescription.entity(forEntityName: RecentSearchData.entityName, in: privateMOC) else { return }
-//            let recentEntity = RecentSearchData(entity: enity, insertInto: privateMOC)
+//            guard let enity = NSEntityDescription.entity(forEntityName: Search.entityName, in: privateMOC) else { return }
+//            let recentEntity = Search(entity: enity, insertInto: privateMOC)
 //            recentEntity.insertRecentSearch(movieId: movieId, movieName: movieTitle)
 //            
 //            do {
