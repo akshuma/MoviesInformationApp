@@ -59,7 +59,7 @@ extension MovieListViewController {
     
     func loadMovieListData(moviesListResponse: [Movies]?) {
         dataSource.movieListData.append(contentsOf: moviesListResponse ?? [])
-        movieTableView.reloadSections(IndexSet.init(integer: 0), with: .none)
+        movieTableView.reloadData()
         
     }
     
