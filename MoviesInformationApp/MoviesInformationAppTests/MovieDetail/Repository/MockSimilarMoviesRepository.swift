@@ -25,10 +25,9 @@ class MockSimilarMoviesRepository: SimilarMoviesRepositoryProtocol {
             completionHandler(result)
         }
     }
-
+    
     func getSimilarMoviesResponse() -> SimilarMoviesResponse? {
         return movieSimilarMoviesResponse
     }
-    
     
 }

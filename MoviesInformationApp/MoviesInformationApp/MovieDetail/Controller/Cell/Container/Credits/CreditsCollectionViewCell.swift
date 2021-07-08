@@ -8,7 +8,7 @@
 import UIKit
 
 class CreditsCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var castImageView: UIImageView!
     @IBOutlet weak var castNameLabel: UILabel!
     
@@ -16,7 +16,7 @@ class CreditsCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         castImageView.makeCorner(withRadius: castImageView.frame.height/2)
     }
-    
+    //MARK:- assignt data 
     func setCreditsCellData(_ castData: Cast?) {
         castNameLabel.text = castData?.name
         if let profilePath = castData?.profilePath {
@@ -26,5 +26,4 @@ class CreditsCollectionViewCell: UICollectionViewCell {
             castImageView.image = UIImage(named: "profile")
         }
     }
-
 }

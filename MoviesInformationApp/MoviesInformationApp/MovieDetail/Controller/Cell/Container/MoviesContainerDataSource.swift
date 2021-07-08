@@ -13,30 +13,29 @@ class MoviesContainerDataSource: NSObject, UICollectionViewDataSource {
     var identifier: ContainerIdenifier?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       let containerIdentifier = identifier
+        let containerIdentifier = identifier
         switch containerIdentifier {
         case .similarMovie:
             return similarMovies.count
         case .cast:
             return castArray.count
         default:
-           return 0
+            return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let containerIdentifier = identifier
-         switch containerIdentifier {
-         case .similarMovie:
-             return fetchSimilarMovieCell(collectionView, indexPath: indexPath)
-         case .cast:
+        switch containerIdentifier {
+        case .similarMovie:
+            return fetchSimilarMovieCell(collectionView, indexPath: indexPath)
+        case .cast:
             return fetchCastMovieCell(collectionView, indexPath: indexPath)
-         default:
-             return UICollectionViewCell()
-         }
+        default:
+            return UICollectionViewCell()
+        }
     }
     
-
 }
 
 extension MoviesContainerDataSource {
@@ -53,8 +52,8 @@ extension MoviesContainerDataSource {
         cell.setCreditsCellData(castArray[indexPath.row])
         return cell
     }
-    
 }
+
 enum ContainerIdenifier: String {
     case similarMovie
     case cast

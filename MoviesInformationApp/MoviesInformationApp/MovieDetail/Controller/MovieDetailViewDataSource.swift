@@ -15,6 +15,7 @@ class MovieDetailViewDataSource: NSObject, UITableViewDataSource {
     var castResponse: CreditsResponse?
     var similarMovies: SimilarMoviesResponse?
     var movieId: Int?
+    //custom delegate
     weak var delegate: MovieDetailViewDataSourceDelegate?
     
     
@@ -48,7 +49,7 @@ class MovieDetailViewDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-
+    
 }
 
 extension MovieDetailViewDataSource {
@@ -63,7 +64,7 @@ extension MovieDetailViewDataSource {
     fileprivate func fetchMovieCast(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.moviesContainerTableViewCell, for: indexPath) as? MoviesContainerTableViewCell else {return MoviesContainerTableViewCell()}
-        let title = (castResponse?.cast?.count ?? 0) > 0 ? "Cast & Crew" : ""
+        let title = (castResponse?.cast?.count ?? 0) > 0 ? "Cast & Crew" : nil
         cell.movieId = movieId
         cell.setUpCellData(castResponse, title: title, containerId: .cast)
         return cell
@@ -73,7 +74,7 @@ extension MovieDetailViewDataSource {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.moviesContainerTableViewCell, for: indexPath) as? MoviesContainerTableViewCell else {return MoviesContainerTableViewCell()}
         cell.movieId = movieId
-        let title = (similarMovies?.results.count ?? 0) > 0 ? "You might also like" : ""
+        let title = (similarMovies?.results.count ?? 0) > 0 ? "You might also like" : nil
         cell.delegate = self
         cell.setUpCellData(similarMovies, title: title, containerId: .similarMovie)
         return cell
@@ -86,6 +87,7 @@ extension MovieDetailViewDataSource {
     }
     
 }
+//MARK:- container delegate function
 extension MovieDetailViewDataSource: ContainerTableViewCellDelegate {
     func moveToMovieDetail(_ movieId: Int, movieTitle: String) {
         delegate?.moveToSimilarMovieDetailPage(movieId, movieTitle: movieTitle)

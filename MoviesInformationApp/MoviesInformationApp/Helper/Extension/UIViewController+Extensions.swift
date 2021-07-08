@@ -15,13 +15,12 @@ extension UIViewController {
         guard
             let navigationBar = self.navigationController?.navigationBar  else { return }
         
-        //self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
         navigationBar.tintColor = UIColor.black
         self.navigationController?.view.backgroundColor = UIColor.clear
-        // Left
+        // Left button
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(backButtonClick))
         self.navigationItem.leftBarButtonItems = isLeftBarButton ? [backButton] : []
     }
@@ -31,7 +30,6 @@ extension UIViewController {
     }
     
     //Add activity indicator
-    
     func startActivityIndicator(onMainThread main: Bool = true) {
         stopActivityIndicator(onMainThread: main)
         if main {
@@ -47,7 +45,7 @@ extension UIViewController {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.tag = self.activityIndicatorTag
         activityIndicator.center = self.view.center
-        activityIndicator.color = UIColor(named: "primaryColor")
+        activityIndicator.color = .gray
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)

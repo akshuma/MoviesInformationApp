@@ -9,9 +9,11 @@ import Foundation
 import CoreData
 
 class RecentSearchDataOperations {
+    
     static let shared = RecentSearchDataOperations()
     let managedObjectContext = CoreDataStack.shared.managedContext
     
+    // Recent Search data insert in to dataBase
     func insertRecentSearches(movie: Movies) {
         guard let movieId = movie.id,
               let movieTitle = movie.title else { return }

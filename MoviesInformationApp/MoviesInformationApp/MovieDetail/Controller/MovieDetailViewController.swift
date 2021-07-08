@@ -8,13 +8,14 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-   
+    
     @IBOutlet weak var movieDetailTableView: UITableView!
+    //Table view data source
     var dataSource = MovieDetailViewDataSource()
+    //Repository assignment
     var synoypsisRepository: SynoypsisRepositoryProtocol = SynoypsisRepository.shared
     var movieCreditsRepository: CreditsRepositoryProtocol = CreditsRepository.shared
     var similarMovieRepository: SimilarMoviesRepositoryProtocol = SimilarMoviesRepository.shared
-     
     
     var movieId: Int?
     var movieTitle: String?
@@ -26,7 +27,7 @@ class MovieDetailViewController: UIViewController {
         getSysnoypsisData(movieId: movieId)
         getMovieCreditsData(movieId: movieId)
         getSimilarMovie(movieId: movieId)
-
+        
     }
     
     fileprivate func setup() {
@@ -44,11 +45,11 @@ class MovieDetailViewController: UIViewController {
         movieDetailTableView.register(UINib(nibName: "\(UserReviewHeaderTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.userReviewHeaderTableViewCell)
         movieDetailTableView.register(UINib(nibName: "\(MoviesContainerTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.moviesContainerTableViewCell)
     }
-
+    
 }
-
+//MARK:- API call
 extension MovieDetailViewController {
-    //MARK:- Synoypsis
+    // Synoypsis api call
     fileprivate func getSysnoypsisData(movieId: Int?) {
         guard let id = movieId else {return }
         startActivityIndicator()
@@ -65,6 +66,7 @@ extension MovieDetailViewController {
         }
     }
     
+    // credits api call
     fileprivate func getMovieCreditsData(movieId: Int?) {
         guard let id = movieId else {return }
         startActivityIndicator()
@@ -80,7 +82,7 @@ extension MovieDetailViewController {
             }
         }
     }
-    
+    // similar api call
     fileprivate func getSimilarMovie(movieId: Int?) {
         guard let id = movieId else {return }
         startActivityIndicator()
@@ -98,7 +100,7 @@ extension MovieDetailViewController {
     }
     
 }
-
+//MARK:- UITableViewDelegate
 extension MovieDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
@@ -112,9 +114,9 @@ extension MovieDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 1:
-            return 200
+            return (dataSource.castResponse?.castAndCrewArray?.count ?? 0) > 0 ? 200 : 0.0
         case 3:
-            return 300
+            return (dataSource.castResponse?.castAndCrewArray?.count ?? 0) > 0 ? 300 : 0.0 
         default:
             return UITableView.automaticDimension
         }
@@ -128,7 +130,7 @@ extension MovieDetailViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
+//MARK:- MovieDetailViewDataSource Delegate
 extension MovieDetailViewController: MovieDetailViewDataSourceDelegate {
     func moveToSimilarMovieDetailPage(_ movieId: Int, movieTitle: String) {
         let storyBoard = UIStoryboard(name: Constant.StoryBoardName.movieDetail, bundle: nil)
@@ -138,6 +140,5 @@ extension MovieDetailViewController: MovieDetailViewDataSourceDelegate {
         vc.movieTitle = movieTitle
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     
 }

@@ -45,24 +45,6 @@
             </objects>
             <point key="canvasLocation" x="908.69565217391312" y="109.82142857142857"/>
         </scene>
-        <!--Movie Search View Controller-->
-        <scene sceneID="fmg-t4-rEZ">
-            <objects>
-                <tableViewController storyboardIdentifier="MovieSearchViewController" id="RRK-lJ-DcB" customClass="MovieSearchViewController" customModule="MoviesInformationApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hcH-9W-rwr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <connections>
-                            <outlet property="dataSource" destination="RRK-lJ-DcB" id="yOS-K8-z0q"/>
-                            <outlet property="delegate" destination="RRK-lJ-DcB" id="OOY-lj-pPw"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="nMz-uz-tfP"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zPY-YG-qPv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2815.9420289855075" y="119.86607142857142"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="B7c-Gn-YYp">
             <objects>
@@ -93,12 +75,61 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="RRK-lJ-DcB" kind="relationship" relationship="rootViewController" id="fPI-O7-gU3"/>
+                        <segue destination="m41-2M-ZQ4" kind="relationship" relationship="rootViewController" id="JAE-7M-WRK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s5m-1f-f2B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1905.7971014492755" y="119.86607142857142"/>
+        </scene>
+        <!--Movie Search View Controller-->
+        <scene sceneID="aHw-DY-MvH">
+            <objects>
+                <viewController storyboardIdentifier="MovieSearchViewController" id="m41-2M-ZQ4" customClass="MovieSearchViewController" customModule="MoviesInformationApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pu1-Qc-Oaw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-Gy-iqU">
+                                <rect key="frame" x="8" y="92" width="398" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="arm-ym-G7q"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="m41-2M-ZQ4" id="5eK-Lb-Hee"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cHW-Rb-T6Z">
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="m41-2M-ZQ4" id="Zii-Ou-qwQ"/>
+                                    <outlet property="delegate" destination="m41-2M-ZQ4" id="i20-ie-WvJ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jCp-7V-BTV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A4i-Gy-iqU" firstAttribute="top" secondItem="jCp-7V-BTV" secondAttribute="top" constant="4" id="142-RE-LyC"/>
+                            <constraint firstItem="cHW-Rb-T6Z" firstAttribute="trailing" secondItem="jCp-7V-BTV" secondAttribute="trailing" id="30E-Tl-J3a"/>
+                            <constraint firstItem="A4i-Gy-iqU" firstAttribute="leading" secondItem="jCp-7V-BTV" secondAttribute="leading" constant="8" id="XEr-oo-ANj"/>
+                            <constraint firstItem="cHW-Rb-T6Z" firstAttribute="leading" secondItem="jCp-7V-BTV" secondAttribute="leading" id="YXy-pf-5LE"/>
+                            <constraint firstAttribute="trailing" secondItem="A4i-Gy-iqU" secondAttribute="trailing" constant="8" id="aj8-Ab-BPO"/>
+                            <constraint firstItem="cHW-Rb-T6Z" firstAttribute="top" secondItem="A4i-Gy-iqU" secondAttribute="bottom" constant="8" id="dBa-u1-7sP"/>
+                            <constraint firstAttribute="bottom" secondItem="cHW-Rb-T6Z" secondAttribute="bottom" id="rZN-Fu-FFL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="a9M-HU-BVj"/>
+                    <connections>
+                        <outlet property="movieSearchBar" destination="A4i-Gy-iqU" id="6tK-5L-cGN"/>
+                        <outlet property="searchTableView" destination="cHW-Rb-T6Z" id="x86-50-6Hu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OHv-ph-mnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2620.289855072464" y="124.55357142857142"/>
         </scene>
     </scenes>
     <resources>

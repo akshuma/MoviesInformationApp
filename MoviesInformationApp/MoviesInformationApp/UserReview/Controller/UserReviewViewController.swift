@@ -9,8 +9,9 @@ import UIKit
 
 class UserReviewViewController: UIViewController {
     @IBOutlet weak var userReviewTableView: UITableView!
-    
+    //TableView dataSource
     var dataSource = UserReviewDataSource()
+    //repository defination
     var useReviewsRepository: UsersReviewsRepositoryProtocol = UsersReviewsRepository.shared
     var movieId: Int?
     var userReviewResponse: UsersReviewsResponse?
@@ -34,10 +35,12 @@ class UserReviewViewController: UIViewController {
     fileprivate func register() {
         //Register cell xib
         userReviewTableView.register(UINib(nibName: "\(UserReviewTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.userReviewTableViewCell)
+        userReviewTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
+//MARK:- API call
 extension UserReviewViewController {
-    //MARK:- api call
+
     fileprivate func getUserReviewsData(movieId: Int?, pageNo: Int) {
         guard let id = movieId else {return }
         startActivityIndicator()
@@ -63,6 +66,7 @@ extension UserReviewViewController {
     }
     
 }
+//MARK:- UITableViewDelegate
 extension UserReviewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if dataSource.usersReview.count == indexPath.row + 1 && (userReviewResponse?.totalPages ?? 0) > pageNo {

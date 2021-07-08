@@ -14,17 +14,21 @@ protocol ContainerTableViewCellDelegate: class {
 
 class MoviesContainerTableViewCell: UITableViewCell {
     @IBOutlet weak var movieCollectionView: UICollectionView!
-    var dataSource = MoviesContainerDataSource()
     @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var titleHeaderView: UIView!
+    //collection view data source
+    var dataSource = MoviesContainerDataSource()
+    //container identifier
+    var containerIdentifier: ContainerIdenifier?
+    //container delegate
+    weak var delegate: ContainerTableViewCellDelegate?
+    //Repository defination
+    var similarMovieRepository: SimilarMoviesRepositoryProtocol = SimilarMoviesRepository.shared
+    var similarMoviesResponse: SimilarMoviesResponse?
     var castArray: [Cast]?
     var similarMoivesArray: [SimilarMovie]?
-    var containerIdentifier: ContainerIdenifier?
-    weak var delegate: ContainerTableViewCellDelegate?
-    var similarMoviesResponse: SimilarMoviesResponse?
     var pageNoForSimilarMovie = 1
     var movieId: Int?
-    
-    var similarMovieRepository: SimilarMoviesRepositoryProtocol = SimilarMoviesRepository.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +36,7 @@ class MoviesContainerTableViewCell: UITableViewCell {
         movieCollectionView.dataSource = dataSource
         movieCollectionView.delegate = self
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -43,7 +47,7 @@ class MoviesContainerTableViewCell: UITableViewCell {
         movieCollectionView.register(UINib(nibName: "\(CreditsCollectionViewCell.self)" , bundle: Bundle.main), forCellWithReuseIdentifier: Constant.CellIdentifier.creditsCollectionViewCell)
     }
     
-    
+    //MARK:- Cell data assignment 
     func setUpCellData<T>(_ cellData: T, title: String?, containerId: ContainerIdenifier) {
         if let cellData = cellData as? CreditsResponse {
             castArray = cellData.cast
@@ -54,16 +58,18 @@ class MoviesContainerTableViewCell: UITableViewCell {
             dataSource.similarMovies = cellData.results
             similarMoviesResponse = cellData
         }
+        titleHeaderView.backgroundColor = title == nil ? UIColor.clear : UIColor.tertiarySystemFill
         headerTitleLabel.text = title
         dataSource.identifier = containerId
         containerIdentifier = containerId
         movieCollectionView.reloadData()
     }
     
-
+    
 }
+//MARK:- api call
 extension MoviesContainerTableViewCell {
-    //MARK:- api call
+    
     fileprivate func getSimilarMovie(movieId: Int?, pageNo: Int) {
         guard let id = movieId else {return }
         similarMovieRepository.getSimilarMoives(moiveId: String(id), pageNo: pageNo) { [weak self] (result) in
@@ -95,7 +101,7 @@ extension MoviesContainerTableViewCell: UICollectionViewDelegateFlowLayout {
         case .similarMovie:
             return CGSize(width: 160, height: 240)
         default:
-            return CGSize(width: 160, height: 125)
+            return CGSize(width: 160, height: 180)
         }
     }
     
@@ -120,7 +126,7 @@ extension MoviesContainerTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch containerIdentifier {
         case .similarMovie:
-            delegate?.moveToMovieDetail(dataSource.similarMovies[indexPath.row].id ?? 0, movieTitle: dataSource.similarMovies[indexPath.row].originalTitle ?? "")
+            delegate?.moveToMovieDetail(dataSource.similarMovies[indexPath.row].id ?? 0, movieTitle: dataSource.similarMovies[indexPath.row].originalTitle ?? String.blank)
         default:
             break
         }

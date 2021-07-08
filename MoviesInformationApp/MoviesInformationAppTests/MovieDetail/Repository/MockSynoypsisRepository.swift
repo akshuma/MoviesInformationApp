@@ -26,10 +26,8 @@ class MockSynoypsisRepository: SynoypsisRepositoryProtocol {
         }
     }
     
-
     func getSynoypsisResponse() -> SynoypsisResponse? {
         return movieSynoypsisResponse 
     }
-    
     
 }

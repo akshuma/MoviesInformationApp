@@ -15,8 +15,6 @@ extension UIImageView {
         self.layer.cornerRadius = 20
         self.layer.masksToBounds = true
     }
-   
-    
     
     //Load image 
     func loadImage(with urlString: String?, placeholder: UIImage? = nil) {
@@ -35,7 +33,7 @@ extension UIImageView {
                 self.image = placeholder
             }
         }
-
+        
     }
     
     //Adding blur effect

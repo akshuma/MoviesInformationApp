@@ -9,6 +9,7 @@ import UIKit
 
 struct Constant {
     
+    //Constant ScreenSize
     struct ScreenSize {
         static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
         static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
@@ -16,6 +17,7 @@ struct Constant {
         static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
     }
     
+    //Constant StoryBoardName as a StoryBoardIdentifiler
     struct StoryBoardName {
         static let movieList = "MovieList"
         static let movieDetail = "MovieDetail"
@@ -42,6 +44,7 @@ struct Constant {
         
     }
     
+    //basePath for images
     struct PosterImageBasePath {
         static let path = "https://image.tmdb.org/t/p/w500"
     }

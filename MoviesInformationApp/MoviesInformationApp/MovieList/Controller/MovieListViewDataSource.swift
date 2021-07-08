@@ -8,7 +8,7 @@
 import UIKit
 
 class MovieListViewDataSource: NSObject, UITableViewDataSource {
-    var movieListData = [Movies]()
+    var movieListData: [Movies] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieListData.count
@@ -17,10 +17,9 @@ class MovieListViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.movieListTableViewCell, for: indexPath)
-                 as? MovieListTableViewCell else {return UITableViewCell()}
+                as? MovieListTableViewCell else {return UITableViewCell()}
         cell.setUpCellData(movieListData[indexPath.row])
         return cell
     }
-    
     
 }

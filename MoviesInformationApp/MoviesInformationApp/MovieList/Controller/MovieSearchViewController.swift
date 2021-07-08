@@ -8,11 +8,17 @@
 import UIKit
 import CoreData
 
-class MovieSearchViewController: UITableViewController {
-
+class MovieSearchViewController: UIViewController {
+    
+    @IBOutlet weak var movieSearchBar: UISearchBar!
+    @IBOutlet weak var searchTableView: UITableView!
+    
+    //Repository assignment
     var movieSearchRepository: MovieSearchRepositoryProtocol = MovieSearchRepository.shared
+    var movieListResponse: MovieListResponse?
     var moviesArray: [Movies]?
     
+    //coredata NSFetchedResultsController assignment
     lazy var recentSearchResultsController: NSFetchedResultsController<MovieRecentSearch> = {
         let fetchRequest: NSFetchRequest<MovieRecentSearch> = MovieRecentSearch.fetchRequest()
         fetchRequest.fetchLimit = 5
@@ -27,31 +33,21 @@ class MovieSearchViewController: UITableViewController {
         register()
         setUp()
     }
-
+    
     fileprivate func register() {
         //Cell Register
-        tableView.register(UINib(nibName: "\(RecentSearchTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.recentSearchTableViewCell)
-        tableView.register(UINib(nibName: "\(SearchTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.searchTableViewCell)
+        searchTableView.register(UINib(nibName: "\(RecentSearchTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.recentSearchTableViewCell)
+        searchTableView.register(UINib(nibName: "\(SearchTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.searchTableViewCell)
     }
     
     fileprivate func setUp() {
         self.title = "Movie Search"
-        tableView.tableFooterView = UIView()
-        setUpSearchBar()
+        searchTableView.tableFooterView = UIView()
+        setCustomNavigation()
         setUpSearchResultViewController()
     }
     
-   fileprivate func setUpSearchBar() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search Movies"
-        self.navigationItem.searchController = searchController
-    
-        self.definesPresentationContext = true
-    }
-    
-    func setUpSearchResultViewController()  {
+    fileprivate func setUpSearchResultViewController()  {
         do {
             try recentSearchResultsController.performFetch()
             recentSearchResultsController.delegate = self
@@ -70,40 +66,30 @@ class MovieSearchViewController: UITableViewController {
     fileprivate func fetchSearchCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> SearchTableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifier.searchTableViewCell, for: indexPath) as? SearchTableViewCell else {return SearchTableViewCell()}
-        cell.searchLabel.text = moviesArray?[indexPath.row].title ?? ""
+        cell.searchLabel.text = moviesArray?[indexPath.row].title ?? String.blank
         return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.backgroundColor = .white
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
 }
-
-extension MovieSearchViewController {
-    // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+// MARK: - Table view data source
+extension MovieSearchViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-   
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return self.moviesArray?.count ?? 0
         case 1:
             return recentSearchResultsController.fetchedObjects?.count ?? 0
         default:
-           return 0
+            return 0
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             return fetchSearchCell(tableView, cellForRowAt: indexPath)
@@ -114,44 +100,62 @@ extension MovieSearchViewController {
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return " Recent Searches"
+        default:
+            return ""
+        }
+    }
+    
 }
+//MARK:- API cell
 extension MovieSearchViewController {
-    //MARK:- API cell
-    // Mark: - Api call
+    
     func getSearchMovies(query: String, pageNo: Int) {
         self.startActivityIndicator()
-        movieSearchRepository.getSearchMovies(query: query, pageNo: 1) {[weak self] (response) in
+        movieSearchRepository.getSearchMovies(query: query, pageNo: pageNo) {[weak self] (response) in
             guard let weakSelf = self else {return}
             weakSelf.stopActivityIndicator()
             switch response {
-            case .success(let movieList, _):
-                weakSelf.moviesArray = movieList.results
-                weakSelf.tableView.reloadData()
+            case .success(let movieListResponse, _):
+                weakSelf.movieListResponse = movieListResponse
+                weakSelf.moviesArray = movieListResponse.filterMovieList(query)
+                weakSelf.searchTableView.reloadData()
             case .failure:
                 break
             }
         }
-     }
+    }
 }
 
-extension MovieSearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text {
+//MARK:- UISearchBarDelegate
+extension MovieSearchViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let text = searchBar.text {
             if text.isEmpty == false {
                 getSearchMovies(query: text, pageNo: 1)
             }
         }
     }
     
-    
-}
-extension MovieSearchViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.reloadData()
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
     }
 }
-extension MovieSearchViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//MARK:- NSFetchedResultsControllerDelegate
+extension MovieSearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.searchTableView.reloadSections(IndexSet(integer: 1), with: .none)
+    }
+}
+
+//MARK:- UITableViewDelegate
+extension MovieSearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             guard let movieData = moviesArray?[indexPath.row] else { return }
@@ -164,7 +168,8 @@ extension MovieSearchViewController {
         }
     }
     
-    func insertDataInToDb(_ movie: Movies) {
+    // data base func for insert data
+    fileprivate func insertDataInToDb(_ movie: Movies) {
         RecentSearchDataOperations.shared.insertRecentSearches(movie: movie)
         guard let movieId = movie.id else { return }
         pushToMoVieDetailView(movieId: Int(movieId), movieTitle: movie.title)
@@ -178,5 +183,5 @@ extension MovieSearchViewController {
         vc.movieTitle = movieTitle
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }

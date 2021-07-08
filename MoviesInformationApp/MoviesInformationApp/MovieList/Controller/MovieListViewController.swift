@@ -8,19 +8,20 @@
 import UIKit
 
 class MovieListViewController: UIViewController {
-
+    
     @IBOutlet weak var movieTableView: UITableView!
+    //Table view data source
     var dataSource = MovieListViewDataSource()
+    //Repository assignment
     var movieListingRepository: MovieListingRepositoryProtocol = MovieListingRepository.shared
     var pageNo: Int = 1
     var movieListResponse: MovieListResponse?
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        register()
         setup()
-        print(movieListingRepository)
+        register()
         getPlayingMovies(pageNo: pageNo)
     }
     
@@ -35,10 +36,11 @@ class MovieListViewController: UIViewController {
         //Register cell xib
         movieTableView.register(UINib(nibName: "\(MovieListTableViewCell.self)", bundle: Bundle.main), forCellReuseIdentifier: Constant.CellIdentifier.movieListTableViewCell)
     }
-
+    
 }
+// MARK: - Api call
 extension MovieListViewController {
-    // Mark: - Api call
+    
     func getPlayingMovies(pageNo: Int) {
         self.pageNo = pageNo
         self.stopActivityIndicator()
@@ -47,30 +49,18 @@ extension MovieListViewController {
             weakSelf.stopActivityIndicator()
             switch response {
             case .success(let movieList, _):
-                weakSelf.loadMovieListData(moviesListResponse: movieList)
+                weakSelf.movieListResponse = movieList
+                weakSelf.loadMovieListData(moviesListResponse: movieList.results)
             case .failure:
                 break
             }
         }
-     }
+    }
     
-    func loadMovieListData(moviesListResponse: MovieListResponse) {
-        guard let moviesData = moviesListResponse.results else {
-            return
-        }
-        movieListResponse = moviesListResponse
-        dataSource.movieListData.append(contentsOf: moviesData)
-        let indexPaths = (0 ..< dataSource.movieListData.count).map {IndexPath(row: $0, section: 0)}
-        //self.movieTableView.performBatchUpdates({ self.movieTableView.insertRows(at: [IndexPath(row: dataSource.movieListData.count - 1, section: 0)], with: .automatic) }, completion: nil)
-//        movieTableView.performBatchUpdates({
-//            movieTableView.insertRows(at: indexPaths, with: .none)
-//        }, completion: nil)
-
-//        movieTableView.beginUpdates()
-//        movieTableView.insertRows(at: [IndexPath(row: dataSource.movieListData.count - 1, section: 0)], with: .none)
-//        movieTableView.endUpdates()
-        movieTableView.reloadData()
-
+    func loadMovieListData(moviesListResponse: [Movies]?) {
+        dataSource.movieListData.append(contentsOf: moviesListResponse ?? [])
+        movieTableView.reloadSections(IndexSet.init(integer: 0), with: .none)
+        
     }
     
     func pushToDetailView(movieId: Int, movieTitle: String)  {
@@ -83,6 +73,7 @@ extension MovieListViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if dataSource.movieListData.count == indexPath.row + 1 && (movieListResponse?.totalPages ?? 0) > pageNo {
@@ -93,11 +84,15 @@ extension MovieListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = dataSource.movieListData[indexPath.row]
-        pushToDetailView(movieId:Int(movie.id ?? 0), movieTitle: movie.title ?? "")
+        pushToDetailView(movieId:Int(movie.id ?? 0), movieTitle: movie.title ?? String.blank)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
 }
-
+// MARK: - push to search view
 extension MovieListViewController {
     @IBAction func movieSearchClick(_ sender: Any) {
         let storyBoard = UIStoryboard(name: Constant.StoryBoardName.movieList, bundle: nil)

@@ -18,7 +18,6 @@ struct Reviews: Codable {
     let authorDetails: AuthorDetails?
     let content, createdAt, id, updatedAt: String?
     let url: String?
-
 }
 
 struct AuthorDetails: Codable {

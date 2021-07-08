@@ -21,7 +21,7 @@ class CoreDataStack {
         let container = NSPersistentContainer(name: self.modelName)
         //Added code for light weight migration
         let options = [NSInferMappingModelAutomaticallyOption: true,
-                            NSMigratePersistentStoresAutomaticallyOption: true]
+                       NSMigratePersistentStoresAutomaticallyOption: true]
         let fileManager = FileManager.default
         let storeName = "\(self.modelName).sqlite"
         
@@ -33,7 +33,7 @@ class CoreDataStack {
         } catch {
             debugPrint("error: \(error.localizedDescription)")
         }
-       
+        
         container.loadPersistentStores { (_, error) in
             if let error = error as NSError? {
                 debugPrint("error: \(error.localizedDescription)")

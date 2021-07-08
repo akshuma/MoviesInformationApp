@@ -18,25 +18,25 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wD-WP-AjB">
-                        <rect key="frame" x="0.0" y="0.0" width="176" height="122"/>
+                        <rect key="frame" x="4" y="0.0" width="168" height="108"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nzy-KV-cK4">
-                                <rect key="frame" x="48" y="16" width="80" height="80"/>
+                                <rect key="frame" x="44" y="4" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="GQP-7H-BtL"/>
                                     <constraint firstAttribute="width" constant="80" id="nWd-Yw-OyF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SRK" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBB-YZ-qQ6">
-                                <rect key="frame" x="4" y="100" width="168" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBB-YZ-qQ6">
+                                <rect key="frame" x="4" y="88" width="160" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Nzy-KV-cK4" firstAttribute="top" secondItem="5wD-WP-AjB" secondAttribute="top" constant="16" id="3NI-KT-Ep6"/>
+                            <constraint firstItem="Nzy-KV-cK4" firstAttribute="top" secondItem="5wD-WP-AjB" secondAttribute="top" constant="4" id="3NI-KT-Ep6"/>
                             <constraint firstAttribute="trailing" secondItem="BBB-YZ-qQ6" secondAttribute="trailing" constant="4" id="Dmk-6f-cxi"/>
                             <constraint firstAttribute="bottom" secondItem="BBB-YZ-qQ6" secondAttribute="bottom" constant="4" id="LYH-9N-YTP"/>
                             <constraint firstItem="BBB-YZ-qQ6" firstAttribute="leading" secondItem="5wD-WP-AjB" secondAttribute="leading" constant="4" id="acp-CA-qyk"/>
@@ -47,11 +47,12 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="5wD-WP-AjB" secondAttribute="bottom" priority="250" id="6QU-hC-WXV"/>
                 <constraint firstItem="5wD-WP-AjB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WSP-Qd-iS8"/>
-                <constraint firstItem="5wD-WP-AjB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iCX-uX-7Ev"/>
-                <constraint firstAttribute="trailing" secondItem="5wD-WP-AjB" secondAttribute="trailing" id="q8d-8A-cDH"/>
+                <constraint firstItem="5wD-WP-AjB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="iCX-uX-7Ev"/>
+                <constraint firstAttribute="trailing" secondItem="5wD-WP-AjB" secondAttribute="trailing" constant="4" id="q8d-8A-cDH"/>
             </constraints>
             <size key="customSize" width="176" height="158"/>
             <connections>

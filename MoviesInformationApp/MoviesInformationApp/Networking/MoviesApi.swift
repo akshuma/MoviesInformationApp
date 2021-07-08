@@ -28,13 +28,13 @@ extension URLComponentsRepresentable {
         return urlComponents.url
     }
 }
+
 enum MoviesApis {
     case moiveList(pageNo: Int)
     case synoypsisData(movieId: String)
     case usersReviews(movieId: String, pageNo: Int)
     case credits(movieId: String)
     case similarMovies(movieId: String, pageNo: Int)
-    
 }
 
 extension MoviesApis :URLComponentsRepresentable{
@@ -77,7 +77,6 @@ extension MoviesApis :URLComponentsRepresentable{
         }
     }
     
-    
     var path: String {
         let basePath = "/\(Environment.apiVersion)"
         switch self {
@@ -93,8 +92,5 @@ extension MoviesApis :URLComponentsRepresentable{
             return "\(basePath)/movie/\(movieId)/similar"
         }
     }
-    
-    
-    
     
 }

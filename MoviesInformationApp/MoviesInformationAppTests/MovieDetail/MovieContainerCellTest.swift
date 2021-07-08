@@ -13,7 +13,7 @@ class MovieContainerCellTest: XCTestCase {
     
     var creditsResponse: CreditsResponse?
     var similarMoviesResponse: SimilarMoviesResponse?
-
+    
     override func setUpWithError() throws {
         super.setUp()
         let mockCreditsRepo = MockCreditsRepository.shared
@@ -28,14 +28,14 @@ class MovieContainerCellTest: XCTestCase {
         similarMoviesResponse = mockSimilarMoviesRepo.getSimilarMoviesResponse()
         creditsResponse = mockCreditsRepo.getCreditsResponse()
     }
-
+    
     
     func test_creditCollection_noOfRows()  {
         let cellItem = getMovieContainerCell(1).movieCollectionView.numberOfItems(inSection: 0)
         //Assert
         XCTAssertEqual(cellItem, 3)
     }
-
+    
     func test_creditCollection_AutherNameText()  {
         let name = getMoviecreditsCollectionCell().castNameLabel.text ?? ""
         let responseName = creditsResponse?.castAndCrewArray?.first?.name
@@ -46,7 +46,7 @@ class MovieContainerCellTest: XCTestCase {
     func test_similarMoviewCollection_movieNameText()  {
         let name = getMovieSimlarCollectionCell().movieNameLabel.text ?? ""
         let responseName = similarMoviesResponse?.results.first?.originalTitle ?? ""
-
+        
         //Assert
         XCTAssertEqual(name, responseName)
     }
@@ -57,7 +57,7 @@ class MovieContainerCellTest: XCTestCase {
         creditsResponse = nil
         similarMoviesResponse = nil
     }
-
+    
 }
 
 extension MovieContainerCellTest {
@@ -78,6 +78,6 @@ extension MovieContainerCellTest {
         collectionView.containerIdentifier = ContainerIdenifier.cast
         return collectionView.movieCollectionView.dataSource?.collectionView(collectionView.movieCollectionView, cellForItemAt: IndexPath(item: 0, section: 0))
             as! SimilarMoviesCollectionViewCell
-   
+        
     }
 }

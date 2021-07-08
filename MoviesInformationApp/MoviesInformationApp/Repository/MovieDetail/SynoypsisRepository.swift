@@ -16,6 +16,7 @@ class SynoypsisRepository: SynoypsisRepositoryProtocol {
     static let shared = SynoypsisRepository()
     private init() { }
     
+    // Api call
     func getSynoypsis(movieId: String, completionHandler: @escaping (Result<SynoypsisResponse, TaskError>) -> Void) {
         let task = HTTPTask()
         task.GET(api: MoviesApis.synoypsisData(movieId: movieId)) { (result: Result<SynoypsisResponse, TaskError>) -> Void in

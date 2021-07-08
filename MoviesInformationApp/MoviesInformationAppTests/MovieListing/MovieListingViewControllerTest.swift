@@ -11,7 +11,7 @@ import XCTest
 class MovieListingViewControllerTest: XCTestCase {
     var controller: MovieListViewController!
     var movieListResponse: MovieListResponse?
-
+    
     override func setUp() {
         super.setUp()
         let mockRepository = MockMovieListingRepository.shared
@@ -19,9 +19,8 @@ class MovieListingViewControllerTest: XCTestCase {
         controller = (storyboard.instantiateViewController(identifier: "movieListViewController") as! MovieListViewController)
         controller.movieListingRepository = mockRepository
         controller.loadViewIfNeeded()
-       // controller.getPlayingMovies(pageNo: 1)
         movieListResponse = mockRepository.getMovieResonse()
-       
+        
     }
     
     func test_movieList_noOfRows_inTableView() {
@@ -80,15 +79,15 @@ class MovieListingViewControllerTest: XCTestCase {
         //Assert
         XCTAssertNotEqual(rating, movieCellRate, "test case fail because moive rating date is equal")
     }
-
+    
     override func tearDownWithError() throws {
         super.tearDown()
         controller = nil
         movieListResponse = nil
-    
+        
     }
-
 }
+
 extension MovieListingViewControllerTest {
     func getMovieTableViewCell() -> MovieListTableViewCell {
         return controller.dataSource.tableView(controller.movieTableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! MovieListTableViewCell

@@ -18,22 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bo3-l4-sHi">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="328"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="292"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJl-MM-sfL">
-                                <rect key="frame" x="16" y="16" width="40" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="3a5-it-4Kj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="q8r-fh-cb2">
-                                <rect key="frame" x="8" y="44" width="309" height="276"/>
+                                <rect key="frame" x="8" y="34" width="309" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="276" id="h2N-K1-bDG"/>
+                                    <constraint firstAttribute="height" constant="250" id="h2N-K1-bDG"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Ii-g0-sWB">
                                     <size key="itemSize" width="128" height="128"/>
@@ -42,13 +33,31 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ke6-Wp-oTy">
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJl-MM-sfL">
+                                        <rect key="frame" x="16" y="6" width="40" height="18"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="bJl-MM-sfL" firstAttribute="leading" secondItem="ke6-Wp-oTy" secondAttribute="leading" constant="16" id="KhF-8s-7Hk"/>
+                                    <constraint firstAttribute="height" constant="30" id="QFg-gQ-p8N"/>
+                                    <constraint firstItem="bJl-MM-sfL" firstAttribute="centerY" secondItem="ke6-Wp-oTy" secondAttribute="centerY" id="zpA-b8-FBM"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bJl-MM-sfL" firstAttribute="top" secondItem="bo3-l4-sHi" secondAttribute="top" constant="16" id="36D-wd-dw7"/>
-                            <constraint firstItem="bJl-MM-sfL" firstAttribute="leading" secondItem="bo3-l4-sHi" secondAttribute="leading" constant="16" id="73G-2J-69p"/>
+                            <constraint firstItem="ke6-Wp-oTy" firstAttribute="top" secondItem="bo3-l4-sHi" secondAttribute="top" id="3nr-Zd-gpa"/>
+                            <constraint firstItem="ke6-Wp-oTy" firstAttribute="leading" secondItem="bo3-l4-sHi" secondAttribute="leading" id="4oi-cG-Fng"/>
                             <constraint firstAttribute="bottom" secondItem="q8r-fh-cb2" secondAttribute="bottom" constant="8" id="Ass-RY-TNV"/>
-                            <constraint firstItem="q8r-fh-cb2" firstAttribute="top" secondItem="bJl-MM-sfL" secondAttribute="bottom" constant="8" id="XKW-A9-fEM"/>
+                            <constraint firstItem="q8r-fh-cb2" firstAttribute="top" secondItem="ke6-Wp-oTy" secondAttribute="bottom" constant="4" id="hgj-o5-DZE"/>
+                            <constraint firstAttribute="trailing" secondItem="ke6-Wp-oTy" secondAttribute="trailing" id="lQM-Uu-yaC"/>
                             <constraint firstItem="q8r-fh-cb2" firstAttribute="leading" secondItem="bo3-l4-sHi" secondAttribute="leading" constant="8" id="r3r-e5-ecy"/>
                             <constraint firstAttribute="trailing" secondItem="q8r-fh-cb2" secondAttribute="trailing" constant="8" id="zS9-0v-yhd"/>
                         </constraints>
@@ -65,6 +74,7 @@
             <connections>
                 <outlet property="headerTitleLabel" destination="bJl-MM-sfL" id="FlG-Sa-c2z"/>
                 <outlet property="movieCollectionView" destination="q8r-fh-cb2" id="6zc-hI-A4R"/>
+                <outlet property="titleHeaderView" destination="ke6-Wp-oTy" id="PPJ-2d-Std"/>
             </connections>
             <point key="canvasLocation" x="93.478260869565219" y="91.741071428571431"/>
         </tableViewCell>

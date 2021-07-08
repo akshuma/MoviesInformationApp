@@ -16,6 +16,7 @@ class SimilarMoviesCollectionViewCell: UICollectionViewCell {
         movieImageView.setCornerRadius()
     }
     
+    //MARK:- assignt data
     func setUpCellData(_ similarMovie: SimilarMovie?) {
         movieNameLabel.text = similarMovie?.originalTitle
         if let posterPath = similarMovie?.posterPath {
@@ -25,5 +26,4 @@ class SimilarMoviesCollectionViewCell: UICollectionViewCell {
             movieImageView.image = UIImage(named: "profile")
         }
     }
-
 }

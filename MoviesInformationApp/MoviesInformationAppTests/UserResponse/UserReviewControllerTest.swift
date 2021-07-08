@@ -13,7 +13,7 @@ class UserReviewControllerTest: XCTestCase {
     
     var controller: UserReviewViewController!
     var userReviewResponse: UsersReviewsResponse?
-
+    
     override func setUpWithError() throws {
         super.setUp()
         let mockRepository = MockUsersReviewsRepository.shared
@@ -99,7 +99,7 @@ class UserReviewControllerTest: XCTestCase {
         controller = nil
         userReviewResponse = nil
     }
-
+    
 }
 
 extension UserReviewControllerTest {

@@ -9,7 +9,7 @@ import XCTest
 @testable import MoviesInformationApp
 
 class EnvironmentTest: XCTestCase {
-
+    
     override func setUpWithError() throws {
         super.setUp()
     }
@@ -27,7 +27,7 @@ class EnvironmentTest: XCTestCase {
         //Assert
         XCTAssertEqual("b2925155642c384d5f9c26a2d4d9e103", apiKey)
     }
-
+    
     func test_ApiVersion_ForDev() {
         //Arrange
         let apiVersion = Environment.apiVersion
@@ -35,11 +35,8 @@ class EnvironmentTest: XCTestCase {
         XCTAssertEqual("3", apiVersion)
     }
     
-    
     override func tearDownWithError() throws {
         super.tearDown()
     }
-
-   
 
 }
