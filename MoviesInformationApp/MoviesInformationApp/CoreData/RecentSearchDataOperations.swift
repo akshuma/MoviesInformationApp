@@ -1,11 +1,12 @@
 //
-//  RecentSearches.swift
-//  MovieApp
+//  RecentSearchDataOperations.swift
+//  MoviesInformationApp
 //
-//  Created by Vishmita Shetty on 25/04/21.
+//  Created by Akshuma Trivedi on 03/08/21.
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class RecentSearchDataOperations {
